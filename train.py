@@ -9,6 +9,7 @@ import os
 import json
 import time
 import matplotlib.pyplot as plt
+from tqdm import tqdm
 
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -71,11 +72,14 @@ optimizer = optim.Adam(net.parameters(),lr=0.0002)
 
 save_path = '.\\AlexNet.pth'
 best_acc = 0.0
-for epoch in range(40):
+epochs = 10
+for epoch in range(epochs):
     net.train()
     total_loss = 0.0
-    t1 = time.perf_counter()
-    for batch,data in enumerate(train_loader):
+    #t1 = time.perf_counter()
+    train_bar = tqdm(train_loader,unit='img',colour="white")
+    for batch,data in enumerate(train_bar):
+        train_bar.set_description("epoch[{}\{}]".format(epoch+1,epochs))
         images,labels = data
         images = images.to(device)
         labels = labels.to(device)
@@ -87,13 +91,14 @@ for epoch in range(40):
 
         total_loss += loss.item()
         # 可视化训练进度
-        rate = (batch+1)/len(train_loader)
-        a = "*" * int(rate * 50)
-        b = "-" * int((1-rate) * 50)
-        print("\rtrain loss: {:^3.0f}%[{}->{}]{:.3f}".format(int(rate*100),a,b,loss),end="")
-
-    print()
-    print(time.perf_counter()-t1)
+    #     rate = (batch+1)/len(train_loader)
+    #     a = "*" * int(rate * 50)
+    #     b = "-" * int((1-rate) * 50)
+    #     print("\rtrain loss: {:^3.0f}%[{}->{}]{:.3f}".format(int(rate*100),a,b,loss),end="")
+    #
+    # print()
+    # print(time.perf_counter()-t1)
+    print("train loss: {:.3f}".format(total_loss/len(train_loader)))
 
     net.eval()
     acc = 0.0
@@ -111,7 +116,7 @@ for epoch in range(40):
             best_acc = average_acc
             torch.save(net.state_dict(),save_path)
 
-        print("[epoch %d] train_loss: %.3f test_acc: %.3f" %(epoch+1,total_loss/len(train_loader),average_acc))
+        print("test_acc: {:.3f}" .format(average_acc))
 
 print("finished training!")
 
