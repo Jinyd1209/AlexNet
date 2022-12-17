@@ -1,3 +1,11 @@
+"""
+@Author: yidon jin
+@Email: m18818261998@163.com
+@FileName: train.py
+@DateTime：2021/12/17 20:38
+@SoftWare: PyCharm
+"""
+
 import numpy as np
 import torch
 import torch.nn as nn

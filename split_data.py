@@ -1,3 +1,12 @@
+"""
+@Author: yidon jin
+@Email: m18818261998@163.com
+@FileName: split_data.py
+@DateTime：2021/12/17 20:40
+@SoftWare: PyCharm
+"""
+
+
 import os
 import random
 from shutil import copy,rmtree   # os模块的补充，主要针对文件的拷贝，删除，移动，压缩和解压操作

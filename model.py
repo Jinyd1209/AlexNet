@@ -1,3 +1,14 @@
+"""
+@Author: yidon jin
+@Email: m18818261998@163.com
+@FileName: model.py
+@DateTime：2021/12/17 20:20
+@SoftWare: PyCharm
+"""
+
+
+
+
 import torch
 import torch.nn as nn
 

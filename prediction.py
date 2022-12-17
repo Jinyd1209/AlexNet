@@ -1,3 +1,15 @@
+"""
+@Author: yidon jin
+@Email: m18818261998@163.com
+@FileName: train.py
+@DateTime：2021/12/17 20:55
+@SoftWare: PyCharm
+"""
+
+
+
+
+
 import torch
 from model import AlexNet
 from PIL import Image
